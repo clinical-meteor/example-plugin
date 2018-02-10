@@ -1,5 +1,11 @@
 Meteor.methods({
-    sampleMethod: function(){
-        console.log('sampleMethod()');
+    createNewNote: function(text){
+        check(text, String);        
+        console.log('createNewNote()', text);
+
+        Notes.insert({
+            resourceType: 'Note',
+            note: text
+        });
     }
 });
