@@ -1,4 +1,4 @@
-import { CardMedia, CardText, CardTitle } from 'material-ui/Card';
+import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
 import { GlassCard, VerticalCanvas } from 'meteor/clinical:glass-ui';
 
 import React from 'react';
@@ -149,8 +149,35 @@ export class SamplePage extends React.Component {
       <div id='indexPage'>
         <VerticalCanvas>
           <GlassCard height='auto'>
-            <CardText>
-              Sample Page
+            <CardTitle title="Blank Canvas - Build Your Own Module" style={{fontSize: '150%'}} />
+            <CardText style={{fontSize: '150%'}}>
+              Need an application framework for your project?  Don't want to spend years figuring out how to interface with electronic health systems?  Build your app as a plugin module for Symptomatic!
+              <br />
+              <br />
+              <br />
+              <ul>
+                <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
+                <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
+                <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
+                <li>Library of FHIR widgets to build your workflow with.</li>              
+                <li>Supported Blockchains:  Ethereum, Bigchain, PokitDok, Hyperledger, IPFS</li>
+                <li>FDA precertification ready with continuous validatoin & verification testing</li>
+                <li>HIPAA Ready with Business Associate Agreements (BAA)</li>              
+                <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
+                <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
+                <li>Dashboards, advanced visualizations, and real time graphs.</li>              
+                <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
+                <li>Themable and brandable</li>              
+                <li>Designed by bioinformatics students at UChicago.</li>              
+              </ul>
+              <br />
+              <br />
+                Contact <a href="demos@symptomatic.io">demos@symptomatic.io</a> to schedule a demo and talk with our Bioinformatics team about implementing your workflow.  
+              <br />
+              <br />
+                
+                Visit our website at <a href="http://www.symptomatic.io">http://www.symptomatic.io</a> to download sourcecode and learn more about meetups, community forums, slack channel, and other ways of getting involved.
+
             </CardText>
           </GlassCard>
         </VerticalCanvas>
