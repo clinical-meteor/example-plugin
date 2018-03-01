@@ -1,9 +1,10 @@
 import SamplePage from './client/SamplePage.jsx';
+import PostcardPage from './client/PostcardPage.jsx';
 
 var DynamicRoutes = [{
   'name': 'SampleRoute',
   'path': '/example-route',
-  'component': SamplePage
+  'component': PostcardPage
 }];
 
 var SidebarElements = [{
@@ -12,4 +13,4 @@ var SidebarElements = [{
   'href': '/example-route'
 }];
 
-export { SidebarElements, DynamicRoutes, SamplePage };
+export { SidebarElements, DynamicRoutes, SamplePage, PostcardPage };
