@@ -1,7 +1,7 @@
 Package.describe({
     name: 'clinical:example-plugin',
     version: '0.1.4',
-    summary: '',
+    summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
 });
@@ -11,7 +11,7 @@ Package.onUse(function(api) {
     
     api.use('meteor-platform');
     api.use('ecmascript');
-    api.use('react-meteor-data');
+    api.use('react-meteor-data0.2.15');
     api.use('session');
     api.use('mongo');
 
