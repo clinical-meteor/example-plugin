@@ -1,5 +1,5 @@
 import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
-import { GlassCard, VerticalCanvas } from 'meteor/clinical:glass-ui';
+import { GlassCard, VerticalCanvas, Glass } from 'meteor/clinical:glass-ui';
 
 import React from 'react';
 import { ReactMeteorData } from 'meteor/react-meteor-data';
@@ -12,7 +12,7 @@ import { Session } from 'meteor/session';
 
 
 
-export class SamplePage extends React.Component {
+export class HelloWorldPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -76,48 +76,12 @@ export class SamplePage extends React.Component {
         title: Glass.darkroom(),
         subtitle: Glass.darkroom()
       },
-      user: {
-        isAdmin: false,
-        isPractitioner: false,
-        isPatient: true
-      },
-      counts: {
-        practitioners: 0,
-        locations: 0,
-        organizations: 0
-      },
       organizations: {
         image: "/pages/provider-directory/organizations.jpg"
       }
     };
 
-    var latestStats = Statistics.getLatest();
-    if(latestStats && latestStats.counts){
-      data.counts = latestStats.counts;
-    }
-
     data.style.indexCard = Glass.darkroom(data.style.indexCard);
-
-    let user = Meteor.user();
-    if (user && user.roles) {
-      user.roles.forEach(function(role){
-        if (role === "sysadmin") {
-          data.user.isAdmin = true;
-        } else if (role === "practitioner") {
-          data.user.isPractitioner = true;
-        } else if (role === "patient") {
-          data.user.isPatient = true;
-        }
-      });
-    }
-
-    if (Meteor.settings && Meteor.settings.public && Meteor.settings.public.app && Meteor.settings.public.app.showUnderConstruction) {
-      data.showUnderConstruction = Meteor.settings.public.app.showUnderConstruction;
-    }
-    if (Meteor.settings && Meteor.settings.public && Meteor.settings.public.app && Meteor.settings.public.app.showExperimental) {
-      data.showExperimental = Meteor.settings.public.app.showExperimental;
-    }
-
 
     if (Session.get('appWidth') < 768) {
       data.style.inactiveIndexCard.width = '100%';
@@ -137,10 +101,7 @@ export class SamplePage extends React.Component {
       }
     }
 
-    // data.style = Glass.blur(data.style);
-    // data.style.appbar = Glass.darkroom(data.style.appbar);
-
-    if(process.env.NODE_ENV === "test") console.log("SamplePage[data]", data);
+    if(process.env.NODE_ENV === "test") console.log("HelloWorldPage[data]", data);
     return data;
   }
   render() {
@@ -149,34 +110,79 @@ export class SamplePage extends React.Component {
       <div id='indexPage'>
         <VerticalCanvas>
           <GlassCard height='auto'>
-            <CardTitle title="Blank Canvas - Build Your Own Module" style={{fontSize: '150%'}} />
-            <CardText style={{fontSize: '150%'}}>
-              Need an application framework for your project?  Don't want to spend years figuring out how to interface with electronic health systems?  Build your app as a plugin module for Symptomatic!
-              <br />
-              <br />
-              <br />
+            <CardTitle 
+              title="Blank Canvas - Build Your Own Module" 
+              subtitle="Welcome to Meteor on FHIR!  A web framework for building HIPAA secure, FDA ready, and EHR ready applications."
+              style={{fontSize: '100%'}} />
+            <CardText style={{fontSize: '100%'}}>
+              
+              <h4>Features</h4>
               <ul>
                 <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
                 <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
                 <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
                 <li>Library of FHIR widgets to build your workflow with.</li>              
-                <li>Supported Blockchains:  Ethereum, Bigchain, PokitDok, Hyperledger, IPFS</li>
-                <li>FDA precertification ready with continuous validatoin & verification testing</li>
-                <li>HIPAA Ready with Business Associate Agreements (BAA)</li>              
+                <li>Designed for continuous integration testing and FDA precertification</li>
+                <li>Desgined with HIPAA scale out strategy</li>              
                 <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
                 <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
-                <li>Dashboards, advanced visualizations, and real time graphs.</li>              
+                <li>Supports dashboards, advanced visualizations, and real time graphs.</li>              
                 <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
                 <li>Themable and brandable</li>              
                 <li>Designed by bioinformatics students at UChicago.</li>              
               </ul>
               <br />
+
+              <h4>Getting Started</h4>
+              <ul>
+                <li>
+                  <a href="https://guide.meteor.com/" >Meteor Guide (Tutorials)</a>                              
+                </li>                              
+                <li>
+                  <a href="https://guide.meteor.com/" >Meteor Guide (Tutorials)</a>                              
+                </li>                              
+                <li>
+                  <a href="https://github.com/clinical-meteor/meteor-on-fhir" >Meteor on FHIR Source Code (Github)</a>                              
+                </li>              
+                <li>
+                  <a href="https://github.com/clinical-meteor/software-development-kit/blob/master/cookbook/creating.a.symptomatic.plugin.md" >Creating a Plugin</a>                              
+                </li>              
+                <li>
+                  <a href="https://github.com/clinical-meteor/example-plugin" >Example Plugin</a>                              
+                </li>              
+                <li>
+                  <a href="https://github.com/clinical-meteor" >Clinical Meteor (GitHub)</a>                              
+                </li>              
+                <li>
+                  <a href="https://clinical.meteorapp.com" >Clinical Meteor - Release Track Homepage</a>                              
+                </li>              
+                <li>
+                  <a href="https://github.com/clinical-meteor/software-development-kit" >Clinical Meteor - Software Development Kit</a>                              
+                </li>              
+                <li>
+                  <a href="https://www.hl7.org/fhir/resourcelist.html" >FHIR Resource List (Healthcare API)</a>                              
+                </li>              
+              </ul> 
               <br />
-                Contact <a href="demos@symptomatic.io">demos@symptomatic.io</a> to schedule a demo and talk with our Bioinformatics team about implementing your workflow.  
-              <br />
-              <br />
-                
-                Visit our website at <a href="http://www.symptomatic.io">http://www.symptomatic.io</a> to download sourcecode and learn more about meetups, community forums, slack channel, and other ways of getting involved.
+
+              <h4>Getting Help</h4>
+              <ul>
+                <li>
+                  <a href="https://github.com/clinical-meteor/meteor-on-fhir/issues" >File a Technical Issue or Bug</a>                              
+                </li>              
+                <li>
+                  <a href="https://www.meetup.com/Javascript-Healthcare-Hackathons/" >Chicago Javascript Healthcare Hackathons</a>
+                </li>              
+                <li>
+                  <a href="http://forums.meteor.com" >Meteor Support Forums</a>
+                </li>              
+                <li>
+                  <a href="http://chat.fhir.org" >FHIR Chat</a>
+                </li>              
+                <li>
+                  <a href="http://http://community.fhir.org/" >FHIR Community Forum</a>
+                </li>              
+              </ul>                            
 
             </CardText>
           </GlassCard>
@@ -196,6 +202,6 @@ export class SamplePage extends React.Component {
 
 
 
-ReactMixin(SamplePage.prototype, ReactMeteorData);
+ReactMixin(HelloWorldPage.prototype, ReactMeteorData);
 
-export default SamplePage;
+export default HelloWorldPage;

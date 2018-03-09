@@ -1,5 +1,5 @@
 import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
-import { GlassCard, VerticalCanvas, FullPageCanvas } from 'meteor/clinical:glass-ui';
+import { GlassCard, VerticalCanvas, FullPageCanvas, Glass } from 'meteor/clinical:glass-ui';
 import { Col, Grid, Row } from 'react-bootstrap';
 
 import React from 'react';
@@ -77,48 +77,12 @@ export class SamplePage extends React.Component {
         title: Glass.darkroom(),
         subtitle: Glass.darkroom()
       },
-      user: {
-        isAdmin: false,
-        isPractitioner: false,
-        isPatient: true
-      },
-      counts: {
-        practitioners: 0,
-        locations: 0,
-        organizations: 0
-      },
       organizations: {
         image: "/pages/provider-directory/organizations.jpg"
       }
     };
 
-    var latestStats = Statistics.getLatest();
-    if(latestStats && latestStats.counts){
-      data.counts = latestStats.counts;
-    }
-
     data.style.indexCard = Glass.darkroom(data.style.indexCard);
-
-    let user = Meteor.user();
-    if (user && user.roles) {
-      user.roles.forEach(function(role){
-        if (role === "sysadmin") {
-          data.user.isAdmin = true;
-        } else if (role === "practitioner") {
-          data.user.isPractitioner = true;
-        } else if (role === "patient") {
-          data.user.isPatient = true;
-        }
-      });
-    }
-
-    if (Meteor.settings && Meteor.settings.public && Meteor.settings.public.app && Meteor.settings.public.app.showUnderConstruction) {
-      data.showUnderConstruction = Meteor.settings.public.app.showUnderConstruction;
-    }
-    if (Meteor.settings && Meteor.settings.public && Meteor.settings.public.app && Meteor.settings.public.app.showExperimental) {
-      data.showExperimental = Meteor.settings.public.app.showExperimental;
-    }
-
 
     if (Session.get('appWidth') < 768) {
       data.style.inactiveIndexCard.width = '100%';
@@ -137,9 +101,6 @@ export class SamplePage extends React.Component {
         position: 'relative'
       }
     }
-
-    // data.style = Glass.blur(data.style);
-    // data.style.appbar = Glass.darkroom(data.style.appbar);
 
     if(process.env.NODE_ENV === "test") console.log("SamplePage[data]", data);
     return data;

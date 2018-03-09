@@ -1,6 +1,6 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.1.2',
+    version: '0.1.4',
     summary: '',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     api.use('session');
     api.use('mongo');
 
-    api.use('clinical:glass-ui');
+    api.use('clinical:glass-ui@2.1.6');
     api.use('clinical:base-model@1.3.5');
     api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
  
