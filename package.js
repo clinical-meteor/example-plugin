@@ -1,6 +1,6 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.1.4',
+    version: '0.1.5',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
@@ -22,8 +22,6 @@ Package.onUse(function(api) {
     api.use('aldeed:simple-schema@1.3.3');
     api.use('aldeed:collection2@2.5.0');
     api.use('simple:json-routes@2.1.0');
-  
-  
 
     api.addFiles('lib/collection.js');
 
@@ -32,10 +30,4 @@ Package.onUse(function(api) {
 
     api.addFiles('assets/asclepius.png', "client", {isAsset: true});    
     api.mainModule('index.jsx', 'client');
-});          
-
-Npm.depends({
-    "material-ui": "0.20.0",
-    "lodash": "4.17.4"
 });
-
