@@ -5,10 +5,6 @@ var DynamicRoutes = [{
   'name': 'HelloWorldPage',
   'path': '/hello-world',
   'component': HelloWorldPage
-}, {
-  'name': 'SampleRoute',
-  'path': '/postcard',
-  'component': PostcardPage
 }];
 
 var SidebarElements = [{

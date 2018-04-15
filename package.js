@@ -1,6 +1,6 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.1.5',
+    version: '0.1.6',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
@@ -17,8 +17,10 @@ Package.onUse(function(api) {
 
     api.use('clinical:glass-ui@2.1.6');
     api.use('clinical:base-model@1.3.5');
-    api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
- 
+    if(Package['clinical:fhir-vault-server']){
+        api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
+    }
+     
     api.use('aldeed:simple-schema@1.3.3');
     api.use('aldeed:collection2@2.5.0');
     api.use('simple:json-routes@2.1.0');
