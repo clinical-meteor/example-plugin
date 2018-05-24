@@ -1,6 +1,6 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.1.6',
+    version: '0.1.7',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
