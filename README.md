@@ -6,8 +6,18 @@ This is an example plugin for Meteor on FHIR (and Symptomatic) that illustrates 
 #### Clone the Example Plugin      
 
 ```bash
-cd webapp/packages
-git clone https://github.com/clinical-meteor/example-plugin  
+# download the Meteor on FHIR Community Server
+git clone http://github.com/clinical-meteor/meteor-on-fhir
+cd webapp
+
+# install the example plugin
+git clone http://github.com/clinical-meteor/example-plugin packages/example-plugin
+
+# run Meteor on FHIR Community Server using the example plugin
+meteor --settings packages/example-plugin/configs/settings.example.json --extra-packages clinical:example-plugin
+
+# permanently add the example plugin to the project
+meteor add clinical:example
 ```
 
 #### Customize the Plugin      
