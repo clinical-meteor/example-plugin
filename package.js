@@ -1,5 +1,5 @@
 Package.describe({
-    name: 'clinical:example-plugin',
+    name: 'symptomatic:example-plugin',
     version: '0.1.7',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
@@ -17,10 +17,13 @@ Package.onUse(function(api) {
 
     api.use('clinical:glass-ui@2.1.6');
     api.use('clinical:base-model@1.3.5');
+
     if(Package['clinical:fhir-vault-server']){
         api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
     }
      
+    api.use('clinical:hl7-resource-observation');
+
     api.use('aldeed:simple-schema@1.3.3');
     api.use('aldeed:collection2@2.5.0');
     api.use('simple:json-routes@2.1.0');
@@ -33,3 +36,13 @@ Package.onUse(function(api) {
     api.addFiles('assets/asclepius.png', "client", {isAsset: true});    
     api.mainModule('index.jsx', 'client');
 });
+
+
+Npm.depends({
+    "moment": "2.20.1",
+    "lodash": "4.17.4",
+    "react": "16.2.0",
+    "react-dom": "16.4.1",
+    "nivo": "0.31.0",
+    'react-katex': '2.0.2'
+})

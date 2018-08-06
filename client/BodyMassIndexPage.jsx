@@ -1,5 +1,5 @@
 import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
-import { GlassCard, VerticalCanvas, FullPageCanvas, Glass } from 'meteor/clinical:glass-ui';
+import { GlassCard, VerticalCanvas, FullPageCanvas, Glass, DynamicSpacer } from 'meteor/clinical:glass-ui';
 import { Col, Grid, Row } from 'react-bootstrap';
 
 import React from 'react';
@@ -8,10 +8,15 @@ import ReactMixin from 'react-mixin';
 import { browserHistory } from 'react-router';
 
 import { get, has } from 'lodash';
+import { moment } from 'meteor/momentjs:moment';
 
 import { Session } from 'meteor/session';
+import { ObservationsTable } from 'meteor/clinical:hl7-resource-observation';
+import { Line } from 'nivo'
+import { render } from 'react-dom'
 
-
+// import { InlineMath, BlockMath } from 'react-katex';
+// import 'katex/dist/katex.min.css';
 
 export class BodyMassIndexPage extends React.Component {
   constructor(props) {
@@ -22,63 +27,20 @@ export class BodyMassIndexPage extends React.Component {
     let imgHeight = (Session.get('appHeight') - 210) / 3;
 
     let data = {
-      style: {
-        page: {},
-        coverImg: {
-          maxWidth: 'inherit',
-          maxHeight: 'inherit',
-          height: 'inherit'
-        },
-        cards: {
-          media: {
-            height: (imgHeight - 1) + 'px',
-            overflowY: 'hidden',
-            objectFit: 'cover'
-          },
-          practitioners: {
-            cursor: 'pointescale-downr',
-            height: imgHeight + 'px',
-            overflowY: 'hidden',
-            objectFit: 'cover'
-          },
-          organizations: {
-            cursor: 'pointer',
-            height: imgHeight + 'px',
-            overflowY: 'hidden',
-            objectFit: 'cover'
-          },
-          locations: {
-            cursor: 'pointer',
-            height: imgHeight + 'px',
-            overflowY: 'hidden',
-            objectFit: 'cover'
-          }
-        },
-        inactiveIndexCard: {
-          opacity: .5,
-          width: '100%',
-          display: 'inline-block',
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          paddingBottom: '0px'
-        },
-        tile: {
-          width: '100%',
-          display: 'inline-block',
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          paddingBottom: '0px',
-          marginBottom: '20px',
-          height: imgHeight + 'px'
-        },
-        spacer: {
-          display: 'block'
-        },
+      chart: {
+        width: Session.get('appWidth') * 0.5,  
+        height: 400
+      },
+      style: {              
         title: Glass.darkroom(),
         subtitle: Glass.darkroom()
       },
       organizations: {
         image: "/pages/provider-directory/organizations.jpg"
+      },
+      bmi: {
+        height: 0,
+        weight: 0
       }
     };
 
@@ -102,88 +64,112 @@ export class BodyMassIndexPage extends React.Component {
       }
     }
 
+    if(Observations.find({'code.text': 'Weight'}).count() > 0){
+      let recentWeight = Observations.find({'code.text': 'Weight'}, {sort: {effectiveDateTime: 1}}).fetch()[0];
+      data.bmi.weight = get(recentWeight, 'valueQuantity.value', 0);
+    }
+    if(Observations.find({'code.text': 'Height'}).count() > 0){
+      let recentHeight = Observations.find({'code.text': 'Height'}, {sort: {effectiveDateTime: 1}}).fetch()[0];
+      data.bmi.height = get(recentHeight, 'valueQuantity.value', 0);
+    }
+
     if(process.env.NODE_ENV === "test") console.log("BodyMassIndexPage[data]", data);
     return data;
   }
   render() {
+    let observationQuery = {$or: [{'code.text': 'Height'}, {'code.text': 'Weight'}]}
+    let bmi = (this.data.bmi.weight / this.data.bmi.height / this.data.bmi.height * 10000).toFixed(2);
 
     return (
       <div id='indexPage'>
         <FullPageCanvas>
           <GlassCard height='auto' >
             <CardTitle 
-              title="Rethink what healthcare software can be."
+              title="Body Mass Calculator"
               titleStyle={{fontSize: '240%'}}
               subtitleStyle={{fontSize: '180%'}}
               />
             <CardText style={{fontSize: '180%'}}>
-            <Grid fluid style={{marginTop: '40px', marginBottom: '80px'}}>
-            
-              <Row>
-              <Col md={6} style={{textAlign:'justified', paddingLeft: '20px', paddingRight: '30px'}}>
-                  <h2>Javascript Healthcare Hackathons</h2>
-                  <a href="https://www.meetup.com/Javascript-Healthcare-Hackathons/" >meetup.com/Javascript-Healthcare-Hackathons</a>
-                  <p>
-                    Thursdays from 5pm till 8pm at the Polsky Center.  Check the meetup page for changes in times and places.
-                  </p>
-                  <br/>
-                  <br/>
-                  <h2>HL7 FHIR & Connectathons</h2>
-                  <a href="http://chat.fhir.org" >chat.fhir.org</a>
-                  <p>
-                    Online community help for data modeling and designing your app so it can connect to electronic health systems systems.
-                  </p>                              
-                  <br/>
-                  <br/>
-                  <h2>Community Videoconference</h2>
-                  <a href="meet.google.com/nww-bhbm-gfq" >meet.google.com/nww-bhbm-gfq</a>
-                  <p>
-                    Weekly community videocall.  Tuesdays at 10am Central Time.   
-                  </p>
-                  <br/>
-                  <br/>
-                  <h2>Premium Features, Licensing, Investing, & Joint Ventures</h2>
-                  <a href="www.symptomatic.io" >www.symptomatic.io</a><br/>
-                  <a href="www.symptomatic.io" >contact@symptomatic.io</a>
-                </Col>
-                <Col md={6} style={{textAlign:'justified', paddingLeft: '30px', paddingRight: '20px'}} >
-                  <h2>Clinical Meteor</h2>
-                  <a href="https://github.com/clinical-meteor" >clinical.meteorapp.com</a>                              
-                  <p>
-                    A release distro of the Meteor.js web framework, customized to be HIPAA secure, integrate with EHRs, and ready for FDA precertification. 
-                  </p>   
-                  <br/>
-                  <br/>
-                  <h2>Meteor on FHIR</h2>
-                  <a href="https://github.com/clinical-meteor/meteor-on-fhir/issues" >github.com/clinical-meteor/meteor-on-fhir</a>                              
-                  <p>
-                    The Meteor on FHIR Interface Engine and Router.  The community version of our software, for you to hack and build on.                   </p>   
-                  <br/>
-                  <br/>
-                  <h2>Issue Tracking</h2>
-                  <a href="https://github.com/clinical-meteor/meteor-on-fhir/issues" >github.com/clinical-meteor/meteor-on-fhir/issues</a>                              
-                  <p>
-                    Found a bug?  Want to suggest a feature?  File an issue!  
-                  </p>     
-                </Col>
-              </Row>
+            <Grid fluid style={{marginTop: '40px', marginBottom: '80px'}}>            
+              <Col md={6}>
+                <Row>
+                  <ObservationsTable query={{$or: [{'code.text': 'Height'}]}} />
+                  <DynamicSpacer />
+                  <ObservationsTable query={{$or: [{'code.text': 'Weight'}]}} />
+                </Row>
+              </Col>
+              <Col md={6}>
+                <Line
+                  width={this.data.chart.width}
+                  height={this.data.chart.height}
+                  curve='cardinal'
+                  data={[
+                    {
+                      "id": "weight",
+                      "color": "hsl(122, 70%, 50%)",
+                      "data": Observations.find({$or: [{'code.text': 'Weight'}]}, {sort: {effectiveDateTime: 1}}).map(function(observation){
+                        return {
+                          x: moment(get(observation, 'effectiveDateTime')).format('MMM DD, YYYY'),
+                          y: get(observation, 'valueQuantity.value')
+                        }
+                      })
+                    }
+                  ]}
+                  margin={{
+                      "top": 50,
+                      "right": 110,
+                      "bottom": 50,
+                      "left": 60
+                  }}
+                  minY="auto"
+                  stacked={true}
+                  axisBottom={{
+                      "orient": "bottom",
+                      "tickSize": 5,
+                      "tickPadding": 5,
+                      "tickRotation": 0,
+                      "legend": "country code",
+                      "legendOffset": 36,
+                      "legendPosition": "center"
+                  }}
+                  axisLeft={{
+                      "orient": "left",
+                      "tickSize": 5,
+                      "tickPadding": 5,
+                      "tickRotation": 0,
+                      "legend": "count",
+                      "legendOffset": -40,
+                      "legendPosition": "center"
+                  }}
+                  dotSize={10}
+                  dotColor="inherit:darker(0.3)"
+                  dotBorderWidth={2}
+                  dotBorderColor="#ffffff"
+                  enableDotLabel={true}
+                  dotLabel="y"
+                  dotLabelYOffset={-12}
+                  animate={true}
+                  motionStiffness={90}
+                  motionDamping={15}
+                  legends={[
+                      {
+                          "anchor": "bottom-right",
+                          "direction": "column",
+                          "translateX": 100,
+                          "itemWidth": 80,
+                          "itemHeight": 20,
+                          "symbolSize": 12,
+                          "symbolShape": "circle"
+                      }
+                  ]}
+                />
+                <DynamicSpacer />
+                <div style={{width: '100%', textAlign: 'center'}}>
+                  <h1>BMI = {this.data.bmi.weight} kg / {this.data.bmi.height} cm / {this.data.bmi.height} cm  * 10,000 = {bmi} </h1>
+                  <a href="https://www.cdc.gov/nccdphp/dnpao/growthcharts/training/bmiage/page5_1.html">https://www.cdc.gov/nccdphp/dnpao/growthcharts/training/bmiage/page5_1.html</a>
+                </div>
+              </Col>
             </Grid>
-              {/* <ul>
-                <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
-                <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
-                <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
-                <li>Library of FHIR widgets to build your workflow with.</li>              
-                <li>Supported Blockchains:  Ethereum, Bigchain, PokitDok, Hyperledger, IPFS</li>
-                <li>FDA precertification ready with continuous validatoin & verification testing</li>
-                <li>HIPAA Ready with Business Associate Agreements (BAA)</li>              
-                <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
-                <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
-                <li>Dashboards, advanced visualizations, and real time graphs.</li>              
-                <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
-                <li>Themable and brandable</li>              
-                <li>Designed by bioinformatics students at UChicago.</li>              
-              </ul> */}
-              <img src="/orbital.png" style={{ right: '40px', position: 'absolute', width: '20%', bottom: '100px', width: '200px'}} /> 
             </CardText>
           </GlassCard>
         </FullPageCanvas>
