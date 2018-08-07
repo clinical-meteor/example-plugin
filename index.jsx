@@ -1,6 +1,6 @@
-import HelloWorldPage from './client/HelloWorldPage.jsx';
-import PostcardPage from './client/PostcardPage.jsx';
-import BodyMassIndexPage from './client/BodyMassIndexPage.jsx';
+import HelloWorldPage from './client/HelloWorldPage';
+import PostcardPage from './client/PostcardPage';
+import BodyMassIndexPage from './client/BodyMassIndexPage';
 
 var DynamicRoutes = [{
   'name': 'HelloWorldPage',
