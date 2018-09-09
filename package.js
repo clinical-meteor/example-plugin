@@ -1,6 +1,6 @@
 Package.describe({
     name: 'symptomatic:example-plugin',
-    version: '0.1.8',
+    version: '0.1.11',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/symptomatic/example-plugin',
     documentation: 'README.md'
@@ -24,8 +24,7 @@ Package.onUse(function(api) {
      
     api.use('clinical:hl7-resource-observation');
 
-    api.use('aldeed:simple-schema@1.3.3');
-    api.use('aldeed:collection2@2.5.0');
+    api.use('aldeed:collection2@3.0.0');
     api.use('simple:json-routes@2.1.0');
 
     api.addFiles('lib/collection.js');
@@ -44,5 +43,6 @@ Npm.depends({
     "react": "16.2.0",
     "react-dom": "16.4.1",
     "nivo": "0.31.0",
-    'react-katex': '2.0.2'
+    'react-katex': '2.0.2',
+    "simpl-schema": "1.5.3"
 })
