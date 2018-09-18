@@ -166,7 +166,7 @@ export class BodyMassIndexPage extends React.Component {
                 <DynamicSpacer />
                 <div style={{width: '100%', textAlign: 'center'}}>
                   <h1>BMI = {this.data.bmi.weight} kg / {this.data.bmi.height} cm / {this.data.bmi.height} cm  * 10,000 = {bmi} </h1>
-                  <a href="https://www.cdc.gov/nccdphp/dnpao/growthcharts/training/bmiage/page5_1.html">https://www.cdc.gov/nccdphp/dnpao/growthcharts/training/bmiage/page5_1.html</a>
+                  <a href="https://www.cdc.gov/nccdphp/dnpao/growthcharts/training/bmiage/page5_1.html">Centers for Disease Control - Body Mass Index Calculations</a>
                 </div>
               </Col>
             </Grid>
