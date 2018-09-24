@@ -128,7 +128,7 @@ export class BodyMassIndexPage extends React.Component {
                       "tickSize": 5,
                       "tickPadding": 5,
                       "tickRotation": 0,
-                      "legend": "country code",
+                      "legend": "observation date",
                       "legendOffset": 36,
                       "legendPosition": "center"
                   }}
@@ -137,7 +137,7 @@ export class BodyMassIndexPage extends React.Component {
                       "tickSize": 5,
                       "tickPadding": 5,
                       "tickRotation": 0,
-                      "legend": "count",
+                      "legend": "weight (kg)",
                       "legendOffset": -40,
                       "legendPosition": "center"
                   }}
