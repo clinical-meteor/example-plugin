@@ -1,6 +1,6 @@
-import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
-import { GlassCard, VerticalCanvas, FullPageCanvas, Glass } from 'meteor/clinical:glass-ui';
-import { Col, Grid, Row } from 'react-bootstrap';
+
+import { Grid, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { StyledCard, PageCanvas, DynamicSpacer } from 'material-fhir-ui';
 
 import React from 'react';
 import { ReactMeteorData } from 'meteor/react-meteor-data';
@@ -73,54 +73,34 @@ export class SamplePage extends React.Component {
         },
         spacer: {
           display: 'block'
-        },
-        title: Glass.darkroom(),
-        subtitle: Glass.darkroom()
+        }
       },
       organizations: {
         image: "/pages/provider-directory/organizations.jpg"
       }
     };
 
-    data.style.indexCard = Glass.darkroom(data.style.indexCard);
-
-    if (Session.get('appWidth') < 768) {
-      data.style.inactiveIndexCard.width = '100%';
-      data.style.inactiveIndexCard.marginBottom = '10px';
-      data.style.inactiveIndexCard.paddingBottom = '10px';
-      data.style.inactiveIndexCard.paddingLeft = '0px';
-      data.style.inactiveIndexCard.paddingRight = '0px';
-
-      data.style.spacer.display = 'none';
-    }
-
-    if(Session.get('appHeight') > 1200){
-      data.style.page = {
-        top: '50%',
-        transform: 'translateY(-50%)',
-        position: 'relative'
-      }
-    }
-
     if(process.env.NODE_ENV === "test") console.log("SamplePage[data]", data);
     return data;
   }
   render() {
 
+    let headerHeight = 84;
+    if(get(Meteor, 'settings.public.defaults.prominantHeader')){
+      headerHeight = 148;
+    }  
+
     return (
-      <div id='indexPage'>
-        <FullPageCanvas>
-          <GlassCard height='auto' >
-            <CardTitle 
-              title="Rethink what healthcare software can be."
-              titleStyle={{fontSize: '240%'}}
-              subtitleStyle={{fontSize: '180%'}}
-              />
-            <CardText style={{fontSize: '180%'}}>
-            <Grid fluid style={{marginTop: '40px', marginBottom: '80px'}}>
-            
-              <Row>
-              <Col md={6} style={{textAlign:'justified', paddingLeft: '20px', paddingRight: '30px'}}>
+      <PageCanvas id='bodyMassPage' headerHeight={headerHeight} >
+        <StyledCard height='auto' margin={20}>
+          <CardHeader 
+            title="Rethink what healthcare software can be."
+            />
+          <CardContent style={{fontSize: '180%'}}>
+          <Grid fluid style={{marginTop: '40px', marginBottom: '80px'}}>
+          
+            <Grid container>
+              <Grid item md={6} style={{textAlign:'justified', paddingLeft: '20px', paddingRight: '30px'}}>
                   <h2>Javascript Healthcare Hackathons</h2>
                   <a href="https://www.meetup.com/Javascript-Healthcare-Hackathons/" >meetup.com/Javascript-Healthcare-Hackathons</a>
                   <p>
@@ -145,8 +125,8 @@ export class SamplePage extends React.Component {
                   <h2>Premium Features, Licensing, Investing, & Joint Ventures</h2>
                   <a href="www.symptomatic.io" >www.symptomatic.io</a><br/>
                   <a href="www.symptomatic.io" >contact@symptomatic.io</a>
-                </Col>
-                <Col md={6} style={{textAlign:'justified', paddingLeft: '30px', paddingRight: '20px'}} >
+                </Grid>
+                <Grid item md={6} style={{textAlign:'justified', paddingLeft: '30px', paddingRight: '20px'}} >
                   <h2>Clinical Meteor</h2>
                   <a href="https://github.com/clinical-meteor" >clinical.meteorapp.com</a>                              
                   <p>
@@ -165,29 +145,28 @@ export class SamplePage extends React.Component {
                   <p>
                     Found a bug?  Want to suggest a feature?  File an issue!  
                   </p>     
-                </Col>
-              </Row>
+                </Grid>
             </Grid>
-              {/* <ul>
-                <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
-                <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
-                <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
-                <li>Library of FHIR widgets to build your workflow with.</li>              
-                <li>Supported Blockchains:  Ethereum, Bigchain, PokitDok, Hyperledger, IPFS</li>
-                <li>FDA precertification ready with continuous validatoin & verification testing</li>
-                <li>HIPAA Ready with Business Associate Agreements (BAA)</li>              
-                <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
-                <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
-                <li>Dashboards, advanced visualizations, and real time graphs.</li>              
-                <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
-                <li>Themable and brandable</li>              
-                <li>Designed by bioinformatics students at UChicago.</li>              
-              </ul> */}
-              <img src="/orbital.png" style={{ right: '40px', position: 'absolute', width: '20%', bottom: '100px', width: '200px'}} /> 
-            </CardText>
-          </GlassCard>
-        </FullPageCanvas>
-      </div>
+          </Grid>
+            {/* <ul>
+              <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
+              <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
+              <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
+              <li>Library of FHIR widgets to build your workflow with.</li>              
+              <li>Supported Blockchains:  Ethereum, Bigchain, PokitDok, Hyperledger, IPFS</li>
+              <li>FDA precertification ready with continuous validatoin & verification testing</li>
+              <li>HIPAA Ready with Business Associate Agreements (BAA)</li>              
+              <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
+              <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
+              <li>Dashboards, advanced visualizations, and real time graphs.</li>              
+              <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
+              <li>Themable and brandable</li>              
+              <li>Designed by bioinformatics students at UChicago.</li>              
+            </ul> */}
+            <img src="/orbital.png" style={{ right: '40px', position: 'absolute', width: '20%', bottom: '100px', width: '200px'}} /> 
+          </CardContent>
+        </StyledCard>
+      </PageCanvas>
     );
   }
 

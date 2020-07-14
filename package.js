@@ -1,6 +1,6 @@
 Package.describe({
     name: 'symptomatic:example-plugin',
-    version: '0.1.17',
+    version: '0.2.2',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/symptomatic/example-plugin',
     documentation: 'README.md'
@@ -9,20 +9,17 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('1.4');
     
-    api.use('meteor-platform');
-    api.use('ecmascript');
+    api.use('meteor-base@1.4.0');
+    api.use('ecmascript@0.13.0');
     api.use('react-meteor-data@0.2.15');
     api.use('session');
     api.use('mongo');
-
-    api.use('clinical:glass-ui@2.1.6');
-    api.use('clinical:base-model@1.3.5');
-
+    
     if(Package['clinical:fhir-vault-server']){
         api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
     }
      
-    api.use('clinical:hl7-resource-observation');
+    api.use('clinical:hl7-fhir-data-infrastructure@6.4.11');
 
     api.use('aldeed:collection2@3.0.0');
     api.use('simple:json-routes@2.1.0');
@@ -38,11 +35,7 @@ Package.onUse(function(api) {
 
 
 Npm.depends({
-    "moment": "2.20.1",
-    "lodash": "4.17.4",
-    "react": "16.2.0",
-    "react-dom": "16.4.1",
-    "nivo": "0.31.0",
-    'react-katex': '2.0.2',
-    "simpl-schema": "1.5.3"
+    "@nivo/core": "0.61.0",
+    "@nivo/line": "0.61.1",
+    'react-katex': '2.0.2'
 })

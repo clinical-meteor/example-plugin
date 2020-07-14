@@ -1,12 +1,14 @@
-import { CardMedia, CardText, CardTitle, CardHeader } from 'material-ui/Card';
-import { GlassCard, VerticalCanvas, Glass } from 'meteor/clinical:glass-ui';
+import { Grid, CardHeader, CardContent, Typography } from '@material-ui/core';
+
+import { StyledCard, PageCanvas, DynamicSpacer } from 'material-fhir-ui';
+
 
 import React from 'react';
 import { ReactMeteorData } from 'meteor/react-meteor-data';
 import ReactMixin from 'react-mixin';
 import { browserHistory } from 'react-router';
 
-import { get, has } from 'lodash';
+import { get } from 'lodash';
 
 import { Session } from 'meteor/session';
 
@@ -72,136 +74,99 @@ export class HelloWorldPage extends React.Component {
         },
         spacer: {
           display: 'block'
-        },
-        title: Glass.darkroom(),
-        subtitle: Glass.darkroom()
+        }
       },
       organizations: {
         image: "/pages/provider-directory/organizations.jpg"
       }
     };
 
-    data.style.indexCard = Glass.darkroom(data.style.indexCard);
-
-    if (Session.get('appWidth') < 768) {
-      data.style.inactiveIndexCard.width = '100%';
-      data.style.inactiveIndexCard.marginBottom = '10px';
-      data.style.inactiveIndexCard.paddingBottom = '10px';
-      data.style.inactiveIndexCard.paddingLeft = '0px';
-      data.style.inactiveIndexCard.paddingRight = '0px';
-
-      data.style.spacer.display = 'none';
-    }
-
-    if(Session.get('appHeight') > 1200){
-      data.style.page = {
-        top: '50%',
-        transform: 'translateY(-50%)',
-        position: 'relative'
-      }
-    }
-
     if(process.env.NODE_ENV === "test") console.log("HelloWorldPage[data]", data);
     return data;
   }
   render() {
 
+    let headerHeight = 84;
+    if(get(Meteor, 'settings.public.defaults.prominantHeader')){
+      headerHeight = 148;
+    }  
+
     return (
-      <div id='indexPage'>
-        <VerticalCanvas>
-          <GlassCard height='auto'>
-            <CardTitle 
-              title="Blank Canvas - Build Your Own Module" 
-              subtitle="Welcome to Meteor on FHIR!  A web framework for building HIPAA secure, FDA ready, and EHR ready applications."
-              style={{fontSize: '100%'}} />
-            <CardText style={{fontSize: '100%'}}>
-              
-              <h4>Features</h4>
-              <ul>
-                <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
-                <li>Compile to Phones, Tablets, Web, TV, and VideoWalls</li>              
-                <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer</li>
-                <li>Library of FHIR widgets to build your workflow with.</li>              
-                <li>Designed for continuous integration testing and FDA precertification</li>
-                <li>Desgined with HIPAA scale out strategy</li>              
-                <li>Ready to go to market with Epic, Cerner, and Apple App Stores, or as SaaS or local deploy</li>              
-                <li>Open source community base (MIT/GPL) with licensable premium plugins</li>              
-                <li>Supports dashboards, advanced visualizations, and real time graphs.</li>              
-                <li>Augmented reality interface, with geomapping and camera support for A/R health apps.</li>              
-                <li>Themable and brandable</li>              
-                <li>Designed by bioinformatics students at UChicago.</li>              
-              </ul>
-              <br />
+      <PageCanvas id='helloWorldPage' headerHeight={headerHeight} >
+        <Grid container justify="center">
+          <Grid item md={4}>
+          <StyledCard height='auto'>
+              <CardHeader 
+                title="Blank Canvas - Build Your Own Module" 
+                style={{fontSize: '100%'}} />
+              <CardContent style={{fontSize: '100%'}}>
 
-              <h4>Getting Started</h4>
-              <ul>
-                <li>
-                  <a href="https://guide.meteor.com/" >Meteor Guide (Tutorials)</a>                              
-                </li>                              
-                <li>
-                  <a href="https://guide.meteor.com/" >Meteor Guide (Tutorials)</a>                              
-                </li>                              
-                <li>
-                  <a href="https://github.com/clinical-meteor/meteor-on-fhir" >Meteor on FHIR Source Code (Github)</a>                              
-                </li>              
-                <li>
-                  <a href="https://github.com/clinical-meteor/software-development-kit/blob/master/cookbook/creating.a.symptomatic.plugin.md" >Creating a Plugin</a>                              
-                </li>              
-                <li>
-                  <a href="https://github.com/clinical-meteor/example-plugin" >Example Plugin</a>                              
-                </li>              
-                <li>
-                  <a href="https://github.com/clinical-meteor" >Clinical Meteor (GitHub)</a>                              
-                </li>              
-                <li>
-                  <a href="https://clinical.meteorapp.com" >Clinical Meteor - Release Track Homepage</a>                              
-                </li>              
-                <li>
-                  <a href="https://github.com/clinical-meteor/software-development-kit" >Clinical Meteor - Software Development Kit</a>                              
-                </li>              
-                <li>
-                  <a href="https://www.hl7.org/fhir/resourcelist.html" >FHIR Resource List (Healthcare API)</a>                              
-                </li>              
-              </ul> 
-              <br />
+                <p>Node on FHIR has an internal architecture similar to the original WordPress software.  That is, it includes base template that is kept open source, and includes a plugin architecture where people can develop custom or proprietary content. </p>
 
-              <h4>Getting Help</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/clinical-meteor/meteor-on-fhir/issues" >File a Technical Issue or Bug</a>                              
-                </li>              
-                <li>
-                  <a href="https://www.meetup.com/Javascript-Healthcare-Hackathons/" >Chicago Javascript Healthcare Hackathons</a>
-                </li>              
-                <li>
-                  <a href="http://forums.meteor.com" >Meteor Support Forums</a>
-                </li>              
-                <li>
-                  <a href="http://chat.fhir.org" >FHIR Chat</a>
-                </li>              
-                <li>
-                  <a href="http://http://community.fhir.org/" >FHIR Community Forum</a>
-                </li>              
-              </ul>                            
+                <h4>Features</h4>
+                <ul>
+                  <li>Open source template.  MIT licensed.  </li>              
+                  <li>Private plugins for your intellectual property datasets, use cases, algorithms</li>              
+                  <li>Build pipelines for desktop apps, smartphones, tablets, and webtv/videowalls.</li>              
+                  <li>Fast Healthcare Interoperability Resources (HL7 FHIR) data interoperability layer.</li>
+                  <li>Library of FHIR widgets to build your workflow with.</li>              
+                  <li>Base template kept under quality control. </li>
+                  <li>Kept up-to-date on security patches and library upgrades</li>
+                  <li>Desgined with HIPAA scale out strategy (single-user to datalakes).</li>              
+                  <li>Ready to go to integrate with Cerner, Epic, and Apple App Stores</li>              
+                  <li>Deployable as a docker instance.</li>              
+                  <li>Supports dashboards, advanced visualizations, and real time graphs.</li>              
+                  <li>Designed by bioinformatics students at UChicago.</li>              
+                </ul>
+                <br />
 
-            </CardText>
-          </GlassCard>
-        </VerticalCanvas>
-      </div>
+                <h4>Getting Started</h4>
+                <ul>                           
+                  <li>
+                    <a href="https://guide.meteor.com/" >Meteor Guide (Tutorials)</a>                              
+                  </li>                                       
+                  <li>
+                    <a href="https://github.com/clinical-meteor/software-development-kit/blob/master/cookbook/creating.a.symptomatic.plugin.md" >Creating a Plugin</a>                              
+                  </li>              
+                  <li>
+                    <a href="https://github.com/clinical-meteor/example-plugin" >Example Plugin</a>                              
+                  </li>                                               
+                  <li>
+                    <a href="https://www.hl7.org/fhir/resourcelist.html" >FHIR Resource List (Healthcare API)</a>                              
+                  </li>              
+                </ul> 
+                <br />
+
+                <h4>Getting Help</h4>
+                <ul>
+                  <li>
+                    <a href="https://github.com/clinical-meteor/meteor-on-fhir/issues" >File a Technical Issue or Bug</a>                              
+                  </li>              
+                  <li>
+                    <a href="https://www.meetup.com/Javascript-Healthcare-Hackathons/" >Chicago Javascript Healthcare Hackathons</a>
+                  </li>              
+                  <li>
+                    <a href="http://forums.meteor.com" >Meteor Support Forums</a>
+                  </li>              
+                  <li>
+                    <a href="http://http://community.fhir.org/" >FHIR Community Forum</a>
+                  </li>              
+                  <li>
+                    <a href="http://chat.fhir.org" >FHIR Chat</a>
+                  </li>              
+                </ul>                            
+              </CardContent>
+            </StyledCard>
+          </Grid>
+        </Grid>
+      </PageCanvas>
     );
   }
-
-
-
-
   openLink(url){
     console.log("openLink", url);
     browserHistory.push(url);
   }
 }
 
-
-
 ReactMixin(HelloWorldPage.prototype, ReactMeteorData);
-
 export default HelloWorldPage;
