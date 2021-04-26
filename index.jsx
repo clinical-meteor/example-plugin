@@ -12,7 +12,9 @@ var DynamicRoutes = [{
   'component': BodyMassIndexPage
 }];
 
-var SidebarElements = [{
+var SidebarElements = [];
+
+let SidebarWorkflows = [{
   'primaryText': 'Example Page',
   'to': '/hello-world',
   'href': '/hello-world'
@@ -22,4 +24,4 @@ var SidebarElements = [{
   'href': '/body-mass-index'
 }];
 
-export { SidebarElements, DynamicRoutes, SamplePage, PostcardPage, BodyMassIndexPage };
+export { SidebarWorkflows, SidebarElements, DynamicRoutes, SamplePage, PostcardPage, BodyMassIndexPage };

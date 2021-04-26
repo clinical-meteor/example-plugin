@@ -1,6 +1,6 @@
 Package.describe({
     name: 'symptomatic:example-plugin',
-    version: '0.2.2',
+    version: '0.3.0',
     summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/symptomatic/example-plugin',
     documentation: 'README.md'
@@ -11,15 +11,12 @@ Package.onUse(function(api) {
     
     api.use('meteor-base@1.4.0');
     api.use('ecmascript@0.13.0');
-    api.use('react-meteor-data@0.2.15');
+    api.use('react-meteor-data@2.1.2');
     api.use('session');
     api.use('mongo');
     
-    if(Package['clinical:fhir-vault-server']){
-        api.use('clinical:fhir-vault-server@0.0.3', ['client', 'server'], {weak: true});
-    }
      
-    api.use('clinical:hl7-fhir-data-infrastructure@6.4.11');
+    api.use('clinical:hl7-fhir-data-infrastructure');
 
     api.use('aldeed:collection2@3.0.0');
     api.use('simple:json-routes@2.1.0');
