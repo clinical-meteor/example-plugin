@@ -1,6 +1,6 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.3.0',
+    version: '0.3.1',
     summary: 'Example Node on FHIR plugin, with dynamic routes and UI elements.',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
@@ -9,12 +9,13 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom('1.4');
     
-    api.use('meteor-base@1.4.0');
-    api.use('ecmascript@0.13.0');
+    api.use('meteor@1.10.0');
+    api.use('webapp@1.13.0');
+    api.use('ecmascript@0.16.0');
     api.use('react-meteor-data@2.4.0');
+
     api.use('session');
-    api.use('mongo');
-    
+    api.use('mongo');    
      
     api.use('clinical:hl7-fhir-data-infrastructure');
 
