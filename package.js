@@ -1,8 +1,8 @@
 Package.describe({
-    name: 'symptomatic:example-plugin',
+    name: 'clinical:example-plugin',
     version: '0.3.0',
-    summary: 'Example Symptomatic plugin, with dynamic routes and UI elements.',
-    git: 'https://github.com/symptomatic/example-plugin',
+    summary: 'Example Node on FHIR plugin, with dynamic routes and UI elements.',
+    git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
 });
   
@@ -11,7 +11,7 @@ Package.onUse(function(api) {
     
     api.use('meteor-base@1.4.0');
     api.use('ecmascript@0.13.0');
-    api.use('react-meteor-data@2.1.2');
+    api.use('react-meteor-data@2.4.0');
     api.use('session');
     api.use('mongo');
     
@@ -21,10 +21,13 @@ Package.onUse(function(api) {
     api.use('aldeed:collection2@3.0.0');
     api.use('simple:json-routes@2.1.0');
 
-    api.addFiles('lib/collection.js');
+    api.addFiles('lib/collections.js');
+    api.addFiles('lib/Notes.js');
 
     api.addFiles('server/methods.js', 'server');
     api.addFiles('server/rest.js', 'server');
+
+    api.addAssets('data/jason.argonaut.sample.ccd', 'server');
 
     api.addFiles('assets/asclepius.png', "client", {isAsset: true});    
     api.mainModule('index.jsx', 'client');

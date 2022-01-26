@@ -1,6 +1,6 @@
 
 import { Grid, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { StyledCard, PageCanvas, DynamicSpacer } from 'material-fhir-ui';
+import { StyledCard, PageCanvas, DynamicSpacer } from 'fhir-starter';
 
 import React from 'react';
 import { ReactMeteorData } from 'meteor/react-meteor-data';

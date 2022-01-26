@@ -71,8 +71,8 @@
           "About": true,
           "ConstructionZone": false,
           "Navbars": false,
-          "DataImport": true,
-          "DataExport": true,
+          "DataImport": false,
+          "DataExport": false,
           "HealthRecords": false,
           "Login": {
             "availability": "web"

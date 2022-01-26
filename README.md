@@ -1,20 +1,36 @@
 # clinical:example-plugin
 
-This is an example plugin for Meteor on FHIR (and Symptomatic) that illustrates how to create a REST endpoint, database collection, server side publication, client side subscription, and a reactive user interface.  When implemented, you can ping the REST endpoint, and it will automatically update the user interface.  
+This is an example plugin for Node on FHIR.  It will provides an example reference of how to create:
 
+- an HTTP REST endpoint  
+- a database collection  
+- server side publication  
+- client side subscription  
+- a reactive user interface  
+- custom settings files  
+
+When implemented, you will be able to post data to the REST endpoint, and see the user interface automatically update to reflect the changes.  
 
 #### Clone the Example Plugin      
 
 ```bash
 # download the Meteor on FHIR Community Server
-git clone http://github.com/clinical-meteor/meteor-on-fhir
-cd webapp
+git clone http://github.com/clinical-meteor/node-on-fhir
+
+cd node-on-fhir
+cd packages
 
 # install the example plugin
-git clone http://github.com/clinical-meteor/example-plugin packages/example-plugin
+git clone http://github.com/clinical-meteor/example-plugin 
 
-# run Meteor on FHIR Community Server using the example plugin
-meteor --settings packages/example-plugin/configs/settings.example.json --extra-packages clinical:example-plugin
+cd ..
+
+# install dependencies
+npm install
+
+
+# run Node on FHIR Community Server using the example plugin
+meteor run --settings packages/example-plugin/configs/settings.example.json --extra-packages clinical:example-plugin
 
 # permanently add the example plugin to the project
 meteor add clinical:example
@@ -40,15 +56,15 @@ packages/my-plugin/configs/settings.example.jsx
 ```
 
 
-#### Run Meteor on FHIR with your plugin  
+#### Run Node on FHIR with your plugin  
 
 ```bash
 # add your package
 meteor add foo:my-plugin
-meteor npm install
+npm install
 
 # run with a custom settings file
-meteor --settings packages/my-plugin/configs/settings.example.json
+meteor run --settings packages/my-plugin/configs/settings.example.json
 ```
 
 #### Example: Body Mass Index - Data Pipeline  

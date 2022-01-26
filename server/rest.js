@@ -1,57 +1,57 @@
 
 
-//==========================================================================================
-// Global Configs  
+// // //==========================================================================================
+// // // Global Configs  
 
-var fhirVersion = 'fhir-3.0.0';
+// // var fhirVersion = 'fhir-3.0.0';
 
-if(typeof oAuth2Server === 'object'){
-  // TODO:  double check that this is needed; and that the /api/ route is correct
-  JsonRoutes.Middleware.use(
-    // '/api/*',
-    '/fhir-3.0.0/*',
-    oAuth2Server.oauthserver.authorise()   // OAUTH FLOW - A7.1
-  );
-}
+// // if(typeof oAuth2Server === 'object'){
+// //   // TODO:  double check that this is needed; and that the /api/ route is correct
+// //   JsonRoutes.Middleware.use(
+// //     // '/api/*',
+// //     '/fhir-3.0.0/*',
+// //     oAuth2Server.oauthserver.authorise()   // OAUTH FLOW - A7.1
+// //   );
+// // }
 
-JsonRoutes.setResponseHeaders({
-  "content-type": "application/fhir+json"
-});
+// // JsonRoutes.setResponseHeaders({
+// //   "content-type": "application/fhir+json"
+// // });
 
 
 
-//==========================================================================================
-// Global Method Overrides
+// //==========================================================================================
+// // Global Method Overrides
 
-// this is temporary fix until PR 132 can be merged in
-// https://github.com/stubailo/meteor-rest/pull/132
+// // this is temporary fix until PR 132 can be merged in
+// // https://github.com/stubailo/meteor-rest/pull/132
 
-JsonRoutes.sendResult = function (res, options) {
-  options = options || {};
+// JsonRoutes.sendResult = function (res, options) {
+//   options = options || {};
 
-  // Set status code on response
-  res.statusCode = options.code || 200;
+//   // Set status code on response
+//   res.statusCode = options.code || 200;
 
-  // Set response body
-  if (options.data !== undefined) {
-    var shouldPrettyPrint = (process.env.NODE_ENV === 'development');
-    var spacer = shouldPrettyPrint ? 2 : null;
-    res.setHeader('Content-type', 'application/fhir+json');
-    res.write(JSON.stringify(options.data, null, spacer));
-  }
+//   // Set response body
+//   if (options.data !== undefined) {
+//     var shouldPrettyPrint = (process.env.NODE_ENV === 'development');
+//     var spacer = shouldPrettyPrint ? 2 : null;
+//     res.setHeader('Content-type', 'application/fhir+json');
+//     res.write(JSON.stringify(options.data, null, spacer));
+//   }
 
-  // We've already set global headers on response, but if they
-  // pass in more here, we set those.
-  if (options.headers) {
-    //setHeaders(res, options.headers);
-    options.headers.forEach(function(value, key){
-      res.setHeader(key, value);
-    });
-  }
+//   // We've already set global headers on response, but if they
+//   // pass in more here, we set those.
+//   if (options.headers) {
+//     //setHeaders(res, options.headers);
+//     options.headers.forEach(function(value, key){
+//       res.setHeader(key, value);
+//     });
+//   }
 
-  // Send the response
-  res.end();
-};
+//   // Send the response
+//   res.end();
+// };
 
 
 
