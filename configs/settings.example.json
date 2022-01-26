@@ -1,55 +1,188 @@
 {
   "public": {
-    "title": "Symptomatic.io",
+    "title": "Example Module",
     "theme": {
       "showVideoBackground": false,
-      "darkroomTextEnabled": false,
       "defaultVideo": "/VideoBackgrounds/GrayWaves.mp4",
-      "backgroundImagePath": "/backgrounds/medical/Gradient.jpg"      
+      "backgroundImagePath": "/backgrounds/medical/Gradient.jpg",
+      "palette": {
+        "primaryColor": "#a92b2d",  
+        "primaryText": "rgba(255,255,255, 1) !important",
+      
+        "secondaryColor": "#444444",
+        "secondaryText": "rgba(255, 255, 255, 1) !important",
+      
+        "cardColor": "#ffffff !important",
+        "cardTextColor": "rgba(0, 0, 0, 1) !important",
+      
+        "errorColor": "rgb(128,20,60) !important",
+        "errorText": "#ffffff !important",
+      
+        "appBarColor": "#000000 !important",
+        "appBarTextColor": "#ffffff !important",
+      
+        "paperColor": "#ffffff !important",
+        "paperTextColor": "rgba(0, 0, 0, 1) !important",
+      
+        "bodyBackground": "#000000",
+
+        "canvasColor": "#f2f2f2",
+
+        "nivoTheme": "purple_orange"
+      },
+      "referenceRanges": {
+        "narrow": ["#69343b", "#415c4d", "#69343b"]  
+      },
+      "grayscaleFilter": "0%"
     },
-    "home": {
-      "showUnderConstruction": false,
-      "showExperimental": false,
-      "showApps": true,      
-      "showFhirMenu": true
+    "loggingThreshold": "debug",    
+    "capabilityStatement": {
+      "resourceTypes": ["Patient", "Observation", "Organization", "Patient", "Person", "ValueSet"]
     },
     "defaults": {
-      "route": "/example-route",
+      "route": "/hello-world",
+      "landingPage": "/hello-world",
+      "homePage": "/hello-world",
       "avatars": true,
       "barcodes": true,
       "hexgridMenu": false,
       "nfcOrbital": false,
       "notificationMenu": false,
       "searchbarVisible": true,
+      "prominantHeader": false,
+      "viewportSafeArea": true,
       "displayNavbars": true,
       "disableHeader": false,
       "disableFooter": false,
-      "darkroom": false,
-      "iFrameEnabled": false,
-      "iFrameUrl": "https://www.wikipedia.org/",
+      "disableCanvasSlide": true,
+      "drawerWidth": 320,
+      "initialScale": 0.6,
+      "defaultPagePadding": 20,
       "paginationLimit": 100,
       "subscriptionLimit": 1000,
-      "cards": {
-        "height": "auto",
-        "opacity": 0.95
-      }      
-    },
-    "interfaces": {
-      "default": {
-        "status": "inactive",
-        "channel": {
-          "endpoint": "http://localhost:80"
+      "sidebar": {
+        "minibarVisible": false,
+        "menuItems": {
+          "HomePage": false,
+          "FhirResources": false,
+          "DynamicModules": true,
+          "SidebarWorkflows": true,
+          "Theme": false,
+          "About": true,
+          "ConstructionZone": false,
+          "Navbars": false,
+          "DataImport": true,
+          "DataExport": true,
+          "HealthRecords": false,
+          "Login": {
+            "availability": "web"
+          },
+          "Registration": false,
+          "Documentation": false,
+          "Marketing": false,
+          "TermsAndConditions": false,
+          "Privacy": false,
+          "QrScanner": false
         },
-        "auth": {
-          "username": "foo",
-          "password": "bar"
+        "hidden": [
+          "/audit-events",
+          "/allergy-intolerances",
+          "/allergy-intollerances",
+          "/body-mass-calculator",
+          "/body-mass-index",
+          "/bundles",
+          "/communications",
+          "/communication-responses",     
+          "/communication-requests",          
+          "/communications",
+          "/conditions",
+          "/care-plans",
+          "/careplans",
+          "/consents",
+          "/contracts",          
+          "/devices",
+          "/document-references",
+          "/encounters",
+          "/explanation-of-benefits",
+          "/diagnostic-reports",
+          "/example-route",
+          "/import-data",   
+          "/imaging-studies",
+          "/immunizations",
+          "/locations",
+          "/lists",
+          "/message-headers",
+          "/measures",
+          "/measure-reports",
+          "/medications",
+          "/medication-orders",
+          "/medication-statements",
+          "/orbital-test",
+          "/organizations",
+          "/persons",
+          "/patients",
+          "/provenances",
+          "/procedures",
+          "/practitioners",
+          "/questionnaires",
+          "/questionnaire-responses",  
+          "/risk-assessments",
+          "/subscriptions",          
+          "/tasks",
+          "/vitals-tracking",
+          "/value-sets",
+          "/valuesets",
+          "/example-page"
+        ],
+        "adminHidden":  [
+          "/allergies",
+          "/communications",
+          "/consents",
+          "/consents",
+          "/contracts",
+          "/claims",
+          "/endpoints",
+          "/biometrics-dashboard",
+          "/body-mass-index",
+          "/imaging-studies",
+          "/immunizations",
+          "/goals",
+          "/locations",
+          "/devices",
+          "/medication-statements",
+          "/persons",
+          "/risk-assessments",
+          "/subscriptions",
+          "/workqueue",
+          "/hello-world",
+          "/vitals-tracking",
+          "/example-route",
+          "/import-data",
+          "/export-data"
+        ],
+        "hiddenWorkflow": [
+          "/patient-quickchart",
+          "/bulk-data-downloader",
+          "/bulk-data-launcher",
+          "/data-pipelines",
+          "/data-import",
+          "/data-export", 
+          "/data-management",
+          "/import-data",
+          "/export-data",
+          "/patient-summary",
+          "/synthea-analysis",
+          "/hgraph-demo",
+          "/orbital-test",
+          "/turntable-hgraph",
+          "/at-home-testing"
+        ],
+        "links": {
+          "documentation": "https://drive.google.com/file/d/1ZOA75FjUfAVFlfvyKnZy_t9KGjAhYweO/view"
         }
       }
     },
-    "meshNetwork": {
-      "upstreamSync": "http://meteor-on-fhir.meteorapp.com/fhir-3.0.0", 
-      "autosync": false
-    },
+
     "modules": {
       "data": true,
       "forum": true,

@@ -51,3 +51,8 @@ meteor npm install
 meteor --settings packages/my-plugin/configs/settings.example.json
 ```
 
+#### Example: Body Mass Index - Data Pipeline  
+
+The BodyMassIndex calculator relies on [SMART on FHIR](http://docs.smarthealthit.org/) to fetch [FHIR Patient](https://www.hl7.org/fhir/patient.html) and [FHIR Observation](https://www.hl7.org/fhir/observation.html) resources.  We then create a [FHIR RiskAssessment](https://www.hl7.org/fhir/riskassessment.html) for obesity.  When fetching from an upstream FHIR Server, the overall data architecture and sequence diagram looks like the following.
+
+![BodyMassIndex Data Pipeline](https://raw.githubusercontent.com/symptomatic/example-plugin/master/assets/Body%20Mass%20Index%20Calculator%20Plugin%20-%20New%20Page.png)  
