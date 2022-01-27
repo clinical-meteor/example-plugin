@@ -16,11 +16,12 @@ Package.onUse(function(api) {
 
     api.use('session');
     api.use('mongo');    
+    api.use('http');    
      
-    api.use('clinical:hl7-fhir-data-infrastructure');
+    api.use('clinical:hl7-fhir-data-infrastructure@6.20.7');
+    api.use('clinical:json-routes@2.2.0');
 
-    api.use('aldeed:collection2@3.0.0');
-    api.use('simple:json-routes@2.1.0');
+    api.use('aldeed:collection2@3.5.0');
 
     api.addFiles('lib/collections.js');
     api.addFiles('lib/Notes.js');
