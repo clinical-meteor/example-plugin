@@ -1,7 +1,7 @@
 Package.describe({
     name: 'clinical:example-plugin',
-    version: '0.3.1',
-    summary: 'Example Node on FHIR plugin, with dynamic routes and UI elements.',
+    version: '0.4.0',
+    summary: 'Schema Parser for Node on FHIR',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
 });
@@ -39,5 +39,6 @@ Package.onUse(function(api) {
 Npm.depends({
     "@nivo/core": "0.61.0",
     "@nivo/line": "0.61.1",
-    'react-katex': '2.0.2'
+    "react-katex": "2.0.2",
+    "react-ace": "10.1.0"
 })
