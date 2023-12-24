@@ -1,7 +1,7 @@
 Package.describe({
     name: 'clinical:example-plugin',
     version: '0.4.0',
-    summary: 'Schema Parser for Node on FHIR',
+    summary: 'Example plugin for Node on FHIR',
     git: 'https://github.com/clinical-meteor/example-plugin',
     documentation: 'README.md'
 });
